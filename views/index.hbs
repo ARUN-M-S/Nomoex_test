@@ -1,0 +1,93 @@
+<h2>Realtime Binance Data</h2>
+<h1 style="text-align: center;">Counter</h1>
+<div >
+    <table class="fl-table">
+        
+        <thead>
+           
+        <tr>
+            <th>Symbol</th>
+            <th>Price Change</th>
+            <th>Pricechange Percent</th>
+            {{!-- <th>Weigthed avg Price</th> --}}
+            <th>lastPrice</th>
+            <th>lastQty</th>
+            <th>bidPrice</th>
+            <th>bidQty</th>
+            <th>askPrice</th>
+            <th>openPrice</th>
+            <th>highPrice</th>
+            <th>lowPrice</th>
+            <th>volume</th>
+
+
+        </tr>
+        
+        </thead>
+        
+        <tbody>
+         {{#each datas}}
+        <tr>
+            <td>{{this.symbol}}</td>
+            <td>{{this.priceChange}}</td>
+            <td>{{this.priceChangePercent}}</td>
+            {{!-- <td>{{this.weightedAvgPrice}}</td> --}}
+            <td>{{this.prevClosePrice}}</td>
+            <td>{{this.lastPrice}}</td>
+            <td>{{this.lastQty}}</td>
+            <td>{{this.bidPrice}}</td>
+            <td>{{this.bidQty}}</td>
+            <td>{{this.askPrice}}</td>
+            <td>{{this.askQty}}</td>
+            <td>{{this.openPrice}}</td>
+            <td>{{this.highPrice}}</td>
+
+
+
+        </tr>
+        {{/each}}
+        <tbody>
+    </table>
+    <div style="width: 70%;height:30px ;margin:20px ;justify-content:center" >
+    <canvas style="background-color: rgb(255, 255, 255)" id="myChart" style="width:50%;max-width:300px ;"></canvas>
+
+    </div>
+</div>
+<script>
+    let counter=5
+    setInterval(()=>{
+        document.querySelector('h1').innerText=counter;
+        counter--
+        if(counter<1){ 
+        counter=5
+        location.reload()}
+
+    },1000)
+    
+</script>
+<script>
+var xValues = [100,200,300,400,500,600,700,800,900,1000];
+
+new Chart("myChart", {
+  type: "line",
+  data: {
+    labels: xValues,
+    datasets: [{ 
+      data: [860,1140,1060,1060,1070,1110,1330,2210,7830,2478],
+      borderColor: "red",
+      fill: false
+    }, { 
+      data: [1600,1700,1700,1900,2000,2700,4000,5000,6000,7000],
+      borderColor: "green",
+      fill: false
+    }, { 
+      data: [300,700,2000,5000,6000,4000,2000,1000,200,100],
+      borderColor: "blue",
+      fill: false
+    }]
+  },
+  options: {
+    legend: {display: false}
+  }
+});
+</script>
